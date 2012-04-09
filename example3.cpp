@@ -100,21 +100,21 @@ StatisticsCollection runExperiment(SearchAlgorithm searchAlgorithm,
         //cout << '\n';
         
         // Accumulate statistics
-        const StatisticsCollection& searchStatistics = search->getStatistics();
+        StatisticsCollection& searchStatistics = const_cast<StatisticsCollection&>(search->getStatistics());
         //searchStatistics.print(cout);
         //cout << '\n';
 
-        cout << "  " << fileIndex;
-        cout << "  " << runIndex;
-        cout << "  " << start; 
-        cout << "  " << target;
+        cout << "fileIndex:  " << fileIndex;
+        cout << " runIndex:  " << runIndex;
+        cout << " start:  " << start;
+        cout << " target:  " << target;
         //     << " " << tiling.getRow(start) << " " << tiling.getCol(start);
         //     << " " << tiling.getRow(target) << " " << tiling.getCol(target);
-        cout << "  " << tiling.getHeuristic(start,target);
-        cout << "  " << searchStatistics.get("path_cost").getMean();
-        cout << "  " << search->getPath().size();
-        cout << "  " << searchStatistics.get("nodes_visited").getMean();
-        cout << "  " << searchStatistics.get("cpu_time").getMean();
+        cout << " heuristic: " << tiling.getHeuristic(start,target);
+        cout << " path_cost: " << searchStatistics.get("path_cost").getMean();
+        cout << " path_size: " << search->getPath().size();
+        cout << " nodes_visited: " << searchStatistics.get("nodes_visited").getMean();
+        cout << " cpu_time: " << searchStatistics.get("cpu_time").getMean();
         cout << '\n';
 
         statistics.add(searchStatistics);

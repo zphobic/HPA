@@ -65,6 +65,7 @@ bool IDAStar::findPath(const Environment& env, int start, int target)
 
 void IDAStar::findPathIdaStar(int start)
 {
+    // if we traverse every node at max cost, what is the total cost?
     const int maxFLimit = m_env->getNumberNodes() * m_env->getMaxCost();
     int heuristic = m_env->getHeuristic(start, m_target);
     m_fLimit = heuristic;
@@ -79,6 +80,7 @@ void IDAStar::findPathIdaStar(int start)
         cerr << "limit = " << m_fLimit << '\n';
         m_nextFLimit = INT_MAX;
         searchPathIdaStar(iteration, start, NO_NODE, 0, 0);
+        // We found a path! We're done.
         if (m_path.size() > 0)
             break;
         if (m_nextFLimit > maxFLimit)
